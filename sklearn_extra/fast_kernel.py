@@ -548,7 +548,8 @@ class FKC_EigenPro(BaseEstimator, ClassifierMixin):
         """
         check_is_fitted(self, ["regressor_"])
         Y = self.regressor_.predict(X)
-        return abs(Y) / np.sum(abs(Y), axis=1, keepdims=True)
+        Y = np.clip(Y, 0, 1)
+        return Y / np.sum(Y, axis=1, keepdims=True)
 
     def _get_tags(self):
         return {'multioutput': True}
