@@ -533,5 +533,22 @@ class FKC_EigenPro(BaseEstimator, ClassifierMixin):
         Y = self.regressor_.predict(X)
         return self.classes_[np.argmax(Y, axis=1)]
 
+    def predict_proba(self, X):
+        """Predict probability of classes using the kernel classification model
+
+        Parameters
+        ----------
+        X : {float, array}, shape = [n_samples, n_features]
+            Samples.
+
+        Returns
+        -------
+        y : {float, array}, shape = [n_samples]
+            Predicted labels.
+        """
+        check_is_fitted(self, ["regressor_"])
+        Y = self.regressor_.predict(X)
+        return abs(Y) / np.sum(abs(Y), axis=1, keepdims=True)
+
     def _get_tags(self):
         return {'multioutput': True}

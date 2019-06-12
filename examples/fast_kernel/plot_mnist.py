@@ -41,7 +41,7 @@ svc_fit_times = []
 svc_pred_times = []
 svc_err = []
 
-train_sizes = [500, 1000, 2000]
+train_sizes = [500, 1000, 10000]
 
 bandwidth = 5.0
 
